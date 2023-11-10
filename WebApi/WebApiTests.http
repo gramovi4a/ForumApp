@@ -1,0 +1,14 @@
+﻿### //login as myself
+POST http://localhost:5297/auth/login
+Content-Type: application/json
+
+{ "Username" : "JUULS", "Password" : "1234" }
+
+### // must be authorized
+
+GET http://localhost:5297/test/authorized
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKV1RTZXJ2aWNlQWNjZXNzVG9rZW4iLCJqdGkiOiI0MDAwODIyYi03MmQyLTRiYzItOTFjZC0yNDkzYjNhOWQwMGEiLCJpYXQiOiIwMS4xMS4yMDIzIDE2OjA4OjEyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkpVVUxTIiwiZXhwIjoxNjk4ODU4NDkyLCJpc3MiOiJKV1RBdXRoZW50aWNhdGlvblNlcnZlciIsImF1ZCI6IkpXVFNlcnZpY2VCbGF6b3JXYXNtQ2xpZW50In0.QDW1UpFaXC__3t7lHEGNRrpy-lB1R-ldeFXipo-HRdmYgEAxauffCjfa2QXCrWEI-nYo5WiWKZF_wnepbC6YAA
+
+### // allow anonymous
+GET http://localhost:5297/test/allowanon
+

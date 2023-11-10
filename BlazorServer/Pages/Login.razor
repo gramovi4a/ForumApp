@@ -1,0 +1,104 @@
+﻿@page "/Login"
+@using BlazorServer.Services.Http
+@using Domain.DTOs
+@using HttpClients.ClientInterfaces
+@inject IAuthService authService
+@inject NavigationManager navMgr
+@inject IUserService iUserService
+@using UIComponents
+
+<AuthorizeView>
+    <NotAuthorized>
+        <div class="card">
+            <h3>Login or Register</h3>
+            <div class="field">
+                <input type="text" @bind="username" placeholder="Username"/>
+            </div>
+            <div class="field">
+                <input type="password" @bind="password" placeholder="Password"/>
+            </div>
+            @if (!string.IsNullOrEmpty(errorLabel))
+            {
+                <div class="field">
+                    <label style="color: red">
+                        @errorLabel
+                    </label>
+                </div>
+            }
+            <div class="field">
+                <button class="loginbtn" @onclick="LoginAsync">Log in</button>
+            </div>
+            <div class="field">
+                <button class="registerbtn" @onclick="RegisterAsync">Register</button>
+            </div>
+        </div>
+        
+    </NotAuthorized>
+    <Authorized>
+    </Authorized>
+</AuthorizeView>
+
+
+<Modal ShowModal="showModal1">
+    <p>You have successfully logged in</p>
+    <button @onclick="@Proceed" class="modal-button">Back</button>
+</Modal>
+<Modal ShowModal="showModal2">
+                    <p>You have successfully registered </p>
+    <button @onclick="@Proceed" class="modal-button">Back</button>
+    </Modal>
+
+@code {
+    private string username;
+    private string password;
+    private bool showModal1;
+    private bool showModal2;
+    private string errorLabel;
+
+    private async Task LoginAsync()
+    {
+        errorLabel = "";
+        try
+        {
+            await authService.LoginAsync(username, password);
+            showModal1 = true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            errorLabel = $"Error: {e.Message}";
+        }
+    }
+    
+    private async Task RegisterAsync()
+    {
+        UserLoginDto user = new UserLoginDto()
+        {
+            Username = username,
+            Password = password
+        
+        };
+        
+        errorLabel = "";
+        try
+        {
+            await iUserService.RegisterAsync(user);
+            showModal2 = true;
+            await authService.LoginAsync(username, password);
+            showModal2 = true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            errorLabel = $"Error: {e.Message}";
+        }
+    }
+    
+    private void Proceed()
+    {
+        showModal1 = false;
+        showModal2 = false;
+        navMgr.NavigateTo("/ViewPosts");
+    }
+
+}

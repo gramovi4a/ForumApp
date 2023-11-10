@@ -1,0 +1,80 @@
+﻿@page "/ViewPosts"
+@using Domain.Models
+@using HttpClients.ClientInterfaces
+@inject IPostService postService
+@inject NavigationManager navMgr
+@using UIComponents
+<PageTitle>Home</PageTitle>
+<h3> All Posts</h3>
+
+@if (posts == null)
+{
+    <span>Loading..</span>
+}
+else if (!posts.Any())
+{
+    <p>No posts to display</p>
+}
+else
+{
+
+    <div class="posts-container">
+        @foreach (Post post in posts)
+        {
+            <div class="post-card" @onclick="() => ViewPost(post)">
+                <h4>@post.Title</h4>
+                <p>By: @post.User.Username</p>
+            </div>
+        }
+    </div>
+    
+    <Modal ShowModal="showModal">
+        <h3>@selectedPost.Title</h3>
+            <p>@selectedPost.Text</p>
+            <p>By: @selectedPost.User.Username</p>
+        <button @onclick="@Proceed" class="modal-button">Back</button>
+    </Modal>
+   
+}
+@if (!string.IsNullOrEmpty(msg))
+{
+    <label style="color: red">@msg</label>
+}
+
+@code {
+    private IEnumerable<Post>? posts;
+    private string msg = "";
+    private bool showModal;
+    
+    private Post selectedPost;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        msg = "";
+        try
+        {
+            posts = await postService.GetAsync(null, null, null, null);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+    
+    private void ViewPost(Post post)
+    {
+        selectedPost = post;
+        showModal = true;
+
+    }
+    
+    private void Proceed()
+    {
+        showModal = false;
+        navMgr.NavigateTo("/ViewPosts");
+    }
+
+
+
+}

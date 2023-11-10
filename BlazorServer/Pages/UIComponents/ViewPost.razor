@@ -1,0 +1,44 @@
+page "/ViewPost/{postId}"
+@using Domain.Models
+@using HttpClients.ClientInterfaces
+@using Domain.DTOs
+@inject IPostService postService
+@namespace UIComponents
+
+<h3>View Post</h3>
+
+@if (post == null)
+{
+    <p>Loading post...</p>
+}
+else
+{
+    <div class="post-details">
+        <h3>@post.Title</h3>
+        <p>@post.Text</p>
+        <p>By: @post.UserName</p>
+    </div>
+}
+
+@code {
+    
+    [Parameter]
+    public int postId { get; set; }
+
+    private PostBasicDto post;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            Console.WriteLine($"ViewPost initialized with postId: {postId}");
+            post = await postService.GetByIdAsync(postId);
+            Console.WriteLine($"Retrieved post: {post.Title}");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            Console.WriteLine($"something is wrong");
+        }
+    }
+}

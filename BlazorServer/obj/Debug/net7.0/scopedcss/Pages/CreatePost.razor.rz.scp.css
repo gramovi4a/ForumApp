@@ -1,0 +1,39 @@
+.input[b-vax338waia] {
+    height: 100px;
+}
+
+.form-group.field[b-vax338waia] {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.form-group.field label[b-vax338waia] {
+    flex: 0.5;
+    
+}
+
+.form-group.field input[b-vax338waia],
+.form-group.field textarea[b-vax338waia] {
+    flex: 2;
+    padding: 5px; 
+}
+
+.form-group.field input[b-vax338waia]::placeholder,
+.form-group.field textarea[b-vax338waia]::placeholder {
+    color: #999; 
+}
+
+.acceptbtn[b-vax338waia]
+{
+    background-color: #FF8b60;
+    color: white;
+    border: none; 
+}
+
+/*.modal-button {*/
+/*    background-color: #FF8b60; !* Set the background color to your desired color *!*/
+/*    color: white; !* Set the text color to white *!*/
+/*    border: none;*/
+/*    padding: 5px 10px; !* Adjust padding as needed *!*/
+/*    border-radius: 10px; !* Add border radius for rounded corners *!*/
+/*}*/

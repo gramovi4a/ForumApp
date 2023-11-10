@@ -1,0 +1,57 @@
+.card[b-7rls8y6kev] {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 300px;
+    padding: 25px;
+    text-align: center;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.field[b-7rls8y6kev] {
+    margin-top: 20px;
+}
+.card.field input[b-7rls8y6kev]::placeholder
+{
+    color: #999;
+}
+
+.field input[b-7rls8y6kev]
+{
+    border-radius: 15px;
+    flex: 2;
+    padding: 5px;
+    background-color: #DCDCDC;
+    color: black;
+    border: none;
+}
+
+.loginbtn[b-7rls8y6kev] {
+    background-color:#0b5ed7;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+}
+
+.loginbtn:hover[b-7rls8y6kev]{
+    transform: scale(1.1);
+    box-shadow: 0 2px 10px 2px #3f3f3f;
+}
+.registerbtn[b-7rls8y6kev] {
+    background-color:white;
+    color: #0b5ed7;
+    border: 1px solid #0b5ed7;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
+.registerbtn:hover[b-7rls8y6kev]{
+    transform: scale(1.1);
+    box-shadow: 0 2px 10px 2px #3f3f3f;
+}

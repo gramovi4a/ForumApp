@@ -1,0 +1,42 @@
+﻿@using BlazorServer.Services.Http
+@namespace Login
+@inject NavigationManager navMgr
+@inject IAuthService authService
+@using UIComponents
+
+
+<AuthorizeView>
+    <Authorized>
+        <img class="icon" src="img/Logout.png" @onclick="Logout"/>
+    </Authorized>
+    <NotAuthorized>
+        <img class="icon" src="img/Login.png" @onclick="Login"/>
+    </NotAuthorized>
+</AuthorizeView>
+
+            <Modal ShowModal="showModal">
+                <p>You have successfully logged out</p>
+                <button @onclick="@Proceed" class="modal-button">Back</button>
+            </Modal>
+
+@code {
+    
+    private bool showModal;
+    private void Login()
+    {
+        navMgr.NavigateTo("/Login");
+    }
+
+    private async Task Logout()
+    {
+        await authService.LogoutAsync();
+        showModal = true;
+        navMgr.NavigateTo("/");
+    }
+    
+    private void Proceed()
+    {
+        showModal = false;
+        navMgr.NavigateTo("/");
+    }
+}
